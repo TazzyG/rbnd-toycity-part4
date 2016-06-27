@@ -15,9 +15,23 @@ class Product < Udacidata
     @brand = opts[:brand]
     @name = opts[:name]
     @price = opts[:price]
+    add_to_products
   end
 
   private
+    # carried this over from part-3
+    # def add_to_products
+    # existing_title = false
+    #   @@products.each do |product|
+    #       existing_name = true if product.name == name
+    #   end
+    #   if existing_name == false
+    #     @@products << self
+    #   else
+    #     raise DuplicateProductError, "#{@name} already exists."
+    #   end
+    # end
+
 
     # Reads the last line of the data file, and gets the id if one exists
     # If it exists, increment and use this value

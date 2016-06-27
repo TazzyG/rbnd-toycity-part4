@@ -1,3 +1,6 @@
+
+#### Start here, one test at a time.
+
 require 'minitest/autorun'
 require_relative '../lib/product'
 require_relative '../data/seeds'
