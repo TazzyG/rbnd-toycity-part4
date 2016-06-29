@@ -1,15 +1,30 @@
+require_relative 'count_by'
+
 module Analyzable
   # Your code goes here!
+
+  def setup
+    @data_path = File.dirname(__FILE__) + "/../data/data.csv"
+    CSV.open(@data_path, "wb") do |csv|
+      csv << ["id", "brand", "product", "price"]
+    end
+    db_seed
+  end
+
+
+	def average_price(array_of_products)
+		total_price = 0
+		array_of_products.each do |product|
+			sum_price += product.price
+		end
+		(sum_price/array_of_products.length).round(2)
+	end
 end
 
 ### From the Features Section in ToyCity 4 Prep
 
-# count_by_brand should accept an array of Product objects and return a hash with inventory counts, organized by brand.
-# Analyzable::count_by_brand(Product.all)
-# #=> {"Lego"=>3, "Fisher-Price"=>2, "Nintendo"=>1, "Crayola"=>2, "Hasbro"=>2}
-# count_by_name should accept an array of Product objects and return a hash with inventory counts, organized by product name.
-# Analyzable::count_by_name(Product.all)
-# #=> {"Sleek Linen Watch"=>2, 
+
+
 # "Heavy Duty Iron Bottle"=>5, 
 # "Lightweight Paper Table"=>1, 
 # "Heavy Duty Wool Shirt"=>1, 
