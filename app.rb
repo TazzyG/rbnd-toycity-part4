@@ -3,6 +3,7 @@ require_relative 'lib/product'
 require_relative 'data/schema'
 require_relative 'data/seeds'
 
+
 include Analyzable
 
 setup

@@ -1,9 +1,11 @@
-require_relative 'count_by'
+require_relative 'find_by'
+require_relative 'errors'
 
 module Analyzable
-  # Your code goes here!
 
-  def setup
+	@@data_path = File.dirname(__FILE__) + "/../data/data.csv"
+
+	def setup
     @data_path = File.dirname(__FILE__) + "/../data/data.csv"
     CSV.open(@data_path, "wb") do |csv|
       csv << ["id", "brand", "product", "price"]
@@ -12,36 +14,51 @@ module Analyzable
   end
 
 
-	def average_price(array_of_products)
+	def average_price(product_arr)
 		total_price = 0
-		array_of_products.each do |product|
-			sum_price += product.price
+		product_arr.each do |product|
+			total_price += product.price.to_f
 		end
-		(sum_price/array_of_products.length).round(2)
+		(total_price / product_arr.length).round(2)
 	end
+
+	def count_by_brand(product_arr)
+  brand_hash = {}
+    product_arr.each do |product|
+      unless brand_hash.include? product.brand
+        brand_hash["#{product.brand}"] = 1
+      else
+        brand_hash["#{product.brand}"] += 1
+      end
+    end
+    return brand_hash
+  end
+
+  def count_by_name(product_arr)
+  name_hash = {}
+    product_arr.each do |product|
+      unless name_hash.include? product.name
+        name_hash["#{product.name}"] = 1
+      else
+        name_hash["#{product.name}"] += 1
+      end
+    end
+    return name_hash
+  end
+
+
+
+
+	def print_report(product_arr)
+		report = "Inventory by Brand: \n"
+		count_by_brand(product_arr).each do |brand, total|
+			report << " - #{brand}: #{total}\n"
+		end
+		report << "Inventory by Name:\n"
+		count_by_name(product_arr).each do |name, total|
+			report << " - #{name}: #{total}\n"
+		end
+		return report
+	end
+
 end
-
-### From the Features Section in ToyCity 4 Prep
-
-
-
-# "Heavy Duty Iron Bottle"=>5, 
-# "Lightweight Paper Table"=>1, 
-# "Heavy Duty Wool Shirt"=>1, 
-# "Enormous Paper Computer"=>1}
-# average_price should accept an array of Product objects and return the average price. (To find the average price: add up the prices and divide by the number of prices you added together.)
-# Analyzable::average_price(Product.all)
-# #=> 51.44
-# print_report should accept an array of Product objects and return a summary inventory report containing: average price, counts by brand, and counts by product name.
-# Analyzable::print_report(Product.all)
-# #=> Average Price: $51.6
-# Inventory by Brand:
-#   - Hasbro: 5
-#   - Fisher-Price: 1
-#   - Crayola: 2
-#   - Lego: 2
-# Inventory by Name:
-#   - Incredible Copper Bag: 3
-#   - Synergistic Rubber Car: 2
-#   - Aerodynamic Marble Computer: 3
-#   - Synergistic Wooden Chair: 2
