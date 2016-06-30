@@ -7,14 +7,14 @@ class Udacidata
 	# data path from schema
 	@@data_path = File.dirname(__FILE__) + "/../data/data.csv"
 
-	create_finder_methods(:brand, :name)
-
  	def self.create(attributes = nil)
+    # this did not work, keeping for reference (churned quite a bit)
  		# products = []
  		# CSV.read(@@data_path, headers:true).each do |product|
  		# 	products << self.new(id: product["id"], brand: product["brand"], name: product["name"], price: product["price"])
    #  end
    #  products 
+
     CSV.foreach(@@data_path) do |row|
       if row[2] == attributes[:name]
         return self.new(id: row[0], brand: row[1], name: row[2], price: row[3])
@@ -76,11 +76,11 @@ class Udacidata
     result
   end
 
- #  def self.reset_file
- #    CSV.open(@@data_path, "wb") do |csv|
- #      csv << ["id", "brand", "product", "price"]
- #    end
- #  end
+  def self.reset_file
+    CSV.open(@@data_path, "wb") do |csv|
+      csv << ["id", "brand", "product", "price"]
+    end
+  end
 
  	def update(options={})
  		select = {}
