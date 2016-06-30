@@ -135,14 +135,14 @@ puts
 pretty_lines
 puts "RETURN AVERAGE PRICE".colorize(:green)
 pretty_lines
-puts Analyzable::average_price(Product.all)
+ap Analyzable::average_price(Product.all)
 
 puts
 pretty_lines
 puts "PRINT SUMMARY REPORT".colorize(:green)
 pretty_lines
 puts 
-
+puts
 puts Analyzable::print_report(Product.all)
 puts
 

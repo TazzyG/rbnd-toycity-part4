@@ -16,27 +16,13 @@ module Analyzable
     db_seed
   end
 
-  def print_report(product_arr)
-    report = "INVENTORY BY BRAND :\n=================\n".colorize(:yellow)
-    count_by_brand(product_arr).each do |brand, total|
-      report << " -   #{brand}. #{total}\n".colorize(:yellow)
-    end
-       
-    report << "\n INVENTORY BY NAME :\n==================\n".colorize(:green)
-    count_by_name(product_arr).each do |name, total|
-      report << " -   #{name}: #{total}\n".colorize(:green)
-    end
-    report
-  end
-
-
 	def average_price(product_arr)
 		total_price = 0
 		product_arr.each do |product|
 			total_price += product.price.to_f
 		end
 		average_price = (total_price / product_arr.length).round(2)
-    puts average_price
+    average_price
 	end
 
 	def count_by_brand(product_arr)
@@ -50,7 +36,8 @@ module Analyzable
     end
     brand_table = Terminal::Table.new :title => "count by brand", :rows => brand_hash
     print brand_table
-    # brand_hash
+    brand_hash
+   
     
   end
 
@@ -66,47 +53,48 @@ module Analyzable
     end
      name_table = Terminal::Table.new :title => "count by name", :rows => name_hash
      print name_table
-     #name_hash
-
+     name_hash
+     
   end
-
   def print_report(product_arr)
-    average_price(product_arr)
-    puts 
-    count_by_brand(product_arr)
-    puts
-    count_by_name(product_arr)
+    report = "Inventory by Brand: \n"
+    count_by_brand(product_arr).each do |brand, total|
+      report << " - #{brand}: #{total}\n"
+    end
+    report << "Inventory by Name:\n"
+    count_by_name(product_arr).each do |name, total|
+      report << " - #{name}: #{total}\n"
+    end
+    return report
   end
 
-  # def print_report(product_arr)
-  #   rows_of_report = {}
-  #   rows_of_report =  {:title => "Inventory by Brand"}
-  #   # undefined method `each' for nil:NilClass (NoMethodError)
-  #   count_by_brand(product_arr).each do |brand, total|
-  #   # undefined method `each' for nil:NilClass (NoMethodError)  
-  #     rows_of_report.merge({:brand => :total})
-  #   end
-  #   rows_report.push("Inventory by Name")
-  #   count_by_name(product_arr).each do |name, total|
-  #     rows_of_report.merge({:name => :total})  
-  #   end
-  #   inventory_table = Terminal::Table.new :rows => rows_of_report
-  #   print inventory_table
+  # def print_pretty_report(product_arr)
+
+  #   # I tried a few things to clean up the report but it failed my tests. 
+  #   # If there is a way to partion with ("=> +2 char "), I couldn't find it. Played with Class:String 
+  #   report = 
+  #   product_arr = product_arr
+  #   average_price = average_price(product_arr).to_s
+  #   brand_report = count_by_brand(product_arr).to_s
+  #   name_report = count_by_name(product_arr).to_s
+  #   puts brand_report
+  #   puts name_report
+
+  #   #Prettier code, but it makes the tests fail. 
+  #   puts "Brand Performance".upcase.colorize(:green)
+  #   puts
+  #   pretty_brand_report = brand_report.delete("{""}") #Caused test to fail, made new variable names
+  #   pretty_brand_report = pretty_brand_report.gsub(/[,]/, "\n")
+  #   puts pretty_brand_report
+  #   puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~".colorize(:magenta)
+  #   puts "Unit Performance".upcase.colorize(:green)
+  #   puts
+  #   pretty_name_report = name_report.delete("{""}")
+  #   pretty_name_report = pretty_name_report.gsub(/[,]/, "\n")
+  #   puts pretty_name_report
+  #   puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~".colorize(:magenta)
+
     
-  # end
-    
-  # ## tried a table but lines seem to look better. 
-  # def print_report(product_arr)
-  #   report = "Inventory by Brand: \n"
-  #   count_by_brand(product_arr).each do |brand, total|
-  #     report << " - #{brand}: #{total}\n"
-  #   end
-  #   report << "Inventory by Name:\n"
-  #   count_by_name(product_arr).each do |name, total|
-  #     report << " - #{name}: #{total}\n"
-  #   end
-  #   #table = Terminal::Table.new :rows => report
-  #   return report
     
   # end
 end
