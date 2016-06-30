@@ -1,7 +1,7 @@
 # for gems from udacitask-part2
 require 'colorize'
 require 'awesome_print'
-
+require 'terminal-table'
 
 require_relative 'lib/analyzable'
 require_relative 'lib/product'
@@ -12,18 +12,22 @@ include Analyzable
 
 setup
 
+def pretty_lines
+	puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~".colorize(:magenta)
+end
+
 # Uncomment the following code once ALL your tests have passed!
 
 db_create
 
-puts "-------------------"
-puts "RETURN ALL PRODUCTS"
-puts "-------------------"
+pretty_lines
+puts "RETURN ALL PRODUCTS".colorize(:green)
+pretty_lines
 ap Product.all
 puts
-puts "-----------------"
-puts "CREATE PRODUCTS"
-puts "-----------------"
+pretty_lines
+puts "CREATE PRODUCTS".colorize(:green)
+pretty_lines
 ap Product.create(brand: "Udacity", name: "yoyo", price: 10.00)
 ap Product.create(brand: "Bouncy", name: "ball", price: 12.00)
 ap Product.create(brand: "MyCool", name: "dollhouse", price: 14.40)
@@ -31,11 +35,11 @@ ap Product.create(brand: "MySoft", name: "stuffed animal", price: 2.09)
 ap Product.create(brand: "AllMy", name: "yoyo", price: 1.00)
 ap Product.create(brand: "Udacity", name: "doll", price: 5.99)
 
-puts "-------------------"
-puts "RETURN ALL PRODUCTS"
-puts "-------------------"
+pretty_lines
+puts "RETURN ALL PRODUCTS".colorize(:green)
+pretty_lines
 ap Product.all
-
+puts
 # puts "--------------------------------------------------------------"
 # puts "TEST ERROR HANDLING FOR DELETE - COMMENT OUT BEFORE SUBMITTING"
 # puts "--------------------------------------------------------------"
@@ -47,97 +51,99 @@ ap Product.all
 # print Product.find(1000000000000)
 
 puts
-puts "--------------------"
-puts "RETURN FIRST PRODUCT"
-puts "--------------------"
+pretty_lines
+puts "RETURN FIRST PRODUCT".colorize(:green)
+pretty_lines
 ap Product.first
 
 
 puts
-puts "-----------------------"
-puts "RETURN FIRST 2 PRODUCTS"
-puts "-----------------------"
+pretty_lines
+puts "RETURN FIRST 2 PRODUCTS".colorize(:green)
+pretty_lines
 ap Product.first(2)
 
 puts
-puts "-------------------"
-puts "RETURN LAST PRODUCT"
-puts "-------------------"
+pretty_lines
+puts "RETURN LAST PRODUCT".colorize(:green)
+pretty_lines
 ap Product.last
 
 puts
-puts "----------------------"
-puts "RETURN LAST 2 PRODUCTS"
-puts "----------------------"
+pretty_lines
+puts "RETURN LAST 2 PRODUCTS".colorize(:green)
+pretty_lines
 ap Product.last(2)
 
 puts
-puts "-------------------------"
-puts "DESTROY PRODUCT WITH ID 2"
-puts "-------------------------"
+pretty_lines
+puts "DESTROY PRODUCT WITH ID 2".colorize(:green)
+pretty_lines
 ap Product.destroy(2)
 
 puts
-puts "-------------------------------"
-puts "FIND PRODUCT 4 AND UPDATE BRAND"
-puts "-------------------------------"
+pretty_lines
+puts "FIND PRODUCT 4 AND UPDATE BRAND".colorize(:green)
+pretty_lines
 ap Product.find(4).update(brand: "NewBrand")
 
 puts
-puts "--------------"
-puts "FIND PRODUCT 1"
-puts "--------------"
+pretty_lines
+puts "FIND PRODUCT 1".colorize(:green)
+pretty_lines
 ap Product.find(1)
 
 puts
-puts "-----------------"
-puts "DESTROY PRODUCT 3"
-puts "-----------------"
+pretty_lines
+puts "DESTROY PRODUCT 3".colorize(:green)
+pretty_lines
 ap Product.destroy(3)
 
 puts
-puts "-------------------------------"
-puts "RETURN PRODUCTS WITH BRAND UDACITY"
-puts "-------------------------------"
+pretty_lines
+puts "RETURN PRODUCTS WITH BRAND UDACITY".colorize(:green)
+pretty_lines
 ap Product.where(brand: "Udacity")
 
 puts
-puts "-------------------------------------"
-puts "RETURN FIRST PRODUCT WITH GIVEN BRAND"
-puts "-------------------------------------"
+pretty_lines
+puts "RETURN FIRST PRODUCT WITH GIVEN BRAND".colorize(:green)
+pretty_lines
 ap Product.find_by_brand("Udacity")
 puts
 
 puts
-puts "------------------------------------"
-puts "RETURN FIRST PRODUCT WITH GIVEN NAME"
-puts "------------------------------------"
+pretty_lines
+puts "RETURN FIRST PRODUCT WITH GIVEN NAME".colorize(:green)
+pretty_lines
 ap Product.find_by_name("yoyo")
 puts
 
 puts
-puts "----------------------------"
-puts "RETURN HASH WITH NAME COUNTS"
-puts "----------------------------"
-print Analyzable::count_by_name(Product.all)
+pretty_lines
+puts "RETURN HASH WITH NAME COUNTS".colorize(:green)
+pretty_lines
+puts Analyzable::count_by_name(Product.all)
 
 puts
-puts "----------------------------"
-puts "RETURN HASH WITH BRAND COUNTS"
-puts "----------------------------"
-print Analyzable::count_by_brand(Product.all)
+pretty_lines
+puts "RETURN HASH WITH BRAND COUNTS".colorize(:green)
+pretty_lines
+puts Analyzable::count_by_brand(Product.all)
 
 puts
-puts "--------------------"
-puts "RETURN AVERAGE PRICE"
-puts "--------------------"
-print Analyzable::average_price(Product.all)
+pretty_lines
+puts "RETURN AVERAGE PRICE".colorize(:green)
+pretty_lines
+puts Analyzable::average_price(Product.all)
 
 puts
-puts "--------------------"
-puts "PRINT SUMMARY REPORT"
-puts "--------------------"
-print Analyzable::print_report(Product.all)
+pretty_lines
+puts "PRINT SUMMARY REPORT".colorize(:green)
+pretty_lines
+puts 
+
+puts Analyzable::print_report(Product.all)
 puts
 
 puts

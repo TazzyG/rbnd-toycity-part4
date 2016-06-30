@@ -33,6 +33,7 @@ class Udacidata
  		CSV.foreach(@@data_path, headers: true) do |row|
  			products.push Product.new(id: row["id"], name: row["product"], brand: row["brand"], price: row["price"])
  		end
+    
  		products
  	end
 

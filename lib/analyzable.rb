@@ -35,7 +35,8 @@ module Analyzable
 		product_arr.each do |product|
 			total_price += product.price.to_f
 		end
-		(total_price / product_arr.length).round(2)
+		average_price = (total_price / product_arr.length).round(2)
+    puts average_price
 	end
 
 	def count_by_brand(product_arr)
@@ -47,9 +48,9 @@ module Analyzable
         brand_hash["#{product.brand}"] += 1
       end
     end
-    table = Terminal::Table.new :rows => brand_hash
-    print table
-    #brand_hash
+    brand_table = Terminal::Table.new :title => "count by brand", :rows => brand_hash
+    print brand_table
+    # brand_hash
     
   end
 
@@ -63,25 +64,53 @@ module Analyzable
         name_hash["#{product.name}"] += 1
       end
     end
-     table = Terminal::Table.new :rows => name_hash
-     print table
+     name_table = Terminal::Table.new :title => "count by name", :rows => name_hash
+     print name_table
+     #name_hash
 
   end
 
-  ## tried a table but lines seem to look better. 
-  # def print_report(objects_array)
-  #   print "INVENTORY BY BRAND".colorize(:yellow)
-  #   count_by_brand(objects_array).each do |k, v|
-  #    print "  #{k}: #{v}".colorize(:yellow)
+  def print_report(product_arr)
+    average_price(product_arr)
+    puts 
+    count_by_brand(product_arr)
+    puts
+    count_by_name(product_arr)
+  end
+
+  # def print_report(product_arr)
+  #   rows_of_report = {}
+  #   rows_of_report =  {:title => "Inventory by Brand"}
+  #   # undefined method `each' for nil:NilClass (NoMethodError)
+  #   count_by_brand(product_arr).each do |brand, total|
+  #   # undefined method `each' for nil:NilClass (NoMethodError)  
+  #     rows_of_report.merge({:brand => :total})
   #   end
-  #   print "INVENTORY BY BRAND".colorize(:green)
-  #   count_by_brand(objects_array).each do |k, v|
-  #   print "  #{k}: #{v}".colorize(:green)
+  #   rows_report.push("Inventory by Name")
+  #   count_by_name(product_arr).each do |name, total|
+  #     rows_of_report.merge({:name => :total})  
   #   end
+  #   inventory_table = Terminal::Table.new :rows => rows_of_report
+  #   print inventory_table
+    
   # end
+    
+  # ## tried a table but lines seem to look better. 
+  # def print_report(product_arr)
+  #   report = "Inventory by Brand: \n"
+  #   count_by_brand(product_arr).each do |brand, total|
+  #     report << " - #{brand}: #{total}\n"
+  #   end
+  #   report << "Inventory by Name:\n"
+  #   count_by_name(product_arr).each do |name, total|
+  #     report << " - #{name}: #{total}\n"
+  #   end
+  #   #table = Terminal::Table.new :rows => report
+  #   return report
+    
+  # end
+end
 
   
 
     
-	
-end
