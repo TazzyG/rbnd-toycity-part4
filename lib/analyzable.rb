@@ -1,8 +1,6 @@
 require_relative 'find_by'
 require_relative 'errors'
-require 'colorize'
-require 'awesome_print'
-require 'terminal-table'
+
 
 module Analyzable
 
@@ -34,9 +32,6 @@ module Analyzable
         brand_hash["#{product.brand}"] += 1
       end
     end
-    brand_table = Terminal::Table.new :title => "count by brand", :rows => brand_hash
-    print brand_table
-    puts "\n"
     brand_hash
 
    
@@ -53,9 +48,6 @@ module Analyzable
         name_hash["#{product.name}"] += 1
       end
     end
-     name_table = Terminal::Table.new :title => "count by name", :rows => name_hash
-     print name_table
-     puts "\n"
      name_hash
     
      
@@ -64,14 +56,14 @@ module Analyzable
     average_price = average_price(product_arr).to_s + "\n"
 
     report = "Average Price $" + average_price
-    report <<"Inventory by Brand: \n".colorize(:green)
+    report <<"Inventory by Brand: \n"
     count_by_brand(product_arr).each do |brand, total|
-      report << " - #{brand}: #{total}\n".colorize(:green)
+      report << " - #{brand}: #{total}\n"
     end
     
-    report << "Inventory by Name:\n".colorize(:yellow)
+    report << "Inventory by Name:\n"
     count_by_name(product_arr).each do |name, total|
-      report << " - #{name}: #{total}\n".colorize(:yellow)
+      report << " - #{name}: #{total}\n"
     end
     report
   end
