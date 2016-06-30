@@ -131,7 +131,7 @@ puts
 pretty_lines
 puts "RETURN AVERAGE PRICE"
 pretty_lines
-ap Analyzable::average_price(Product.all)
+puts Analyzable::average_price(Product.all)
 
 puts
 pretty_lines
