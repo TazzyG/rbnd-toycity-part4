@@ -124,13 +124,13 @@ pretty_lines
 puts "RETURN HASH WITH NAME COUNTS".colorize(:green)
 pretty_lines
 puts Analyzable::count_by_name(Product.all)
-
+pretty_lines
 puts
 pretty_lines
 puts "RETURN HASH WITH BRAND COUNTS".colorize(:green)
 pretty_lines
 puts Analyzable::count_by_brand(Product.all)
-
+pretty_lines
 puts
 pretty_lines
 puts "RETURN AVERAGE PRICE".colorize(:green)

@@ -36,7 +36,9 @@ module Analyzable
     end
     brand_table = Terminal::Table.new :title => "count by brand", :rows => brand_hash
     print brand_table
+    puts "\n"
     brand_hash
+
    
     
   end
@@ -53,19 +55,25 @@ module Analyzable
     end
      name_table = Terminal::Table.new :title => "count by name", :rows => name_hash
      print name_table
+     puts "\n"
      name_hash
+    
      
   end
   def print_report(product_arr)
-    report = "Inventory by Brand: \n"
+    average_price = average_price(product_arr).to_s + "\n"
+
+    report = "Average Price $" + average_price
+    report <<"Inventory by Brand: \n".colorize(:green)
     count_by_brand(product_arr).each do |brand, total|
-      report << " - #{brand}: #{total}\n"
+      report << " - #{brand}: #{total}\n".colorize(:green)
     end
-    report << "Inventory by Name:\n"
+    
+    report << "Inventory by Name:\n".colorize(:yellow)
     count_by_name(product_arr).each do |name, total|
-      report << " - #{name}: #{total}\n"
+      report << " - #{name}: #{total}\n".colorize(:yellow)
     end
-    return report
+    report
   end
 
   # def print_pretty_report(product_arr)
