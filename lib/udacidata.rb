@@ -7,8 +7,10 @@ class Udacidata
 	# data path from schema
 	@@data_path = File.dirname(__FILE__) + "/../data/data.csv"
 
+  create_finder_methods(:brand, :name)
+
  	def self.create(attributes = nil)
-    # this did not work, keeping for reference (churned quite a bit)
+    # this did not work, keeping for reference (churned quite a bit).. kept it for learning.
  		# products = []
  		# CSV.read(@@data_path, headers:true).each do |product|
  		# 	products << self.new(id: product["id"], brand: product["brand"], name: product["name"], price: product["price"])
@@ -55,6 +57,7 @@ class Udacidata
   end
 
 
+
  	def self.destroy(id)
  		product = self.find(id)
  		#http://ruby-doc.org/stdlib-1.9.2/libdoc/csv/rdoc/CSV/Table.html
@@ -77,11 +80,12 @@ class Udacidata
     result
   end
 
-  def self.reset_file
-    CSV.open(@@data_path, "wb") do |csv|
-      csv << ["id", "brand", "product", "price"]
-    end
-  end
+  # not sure if I need this but kept it just in case - had some problems with missing item 2
+  # def self.reset_file
+  #   CSV.open(@@data_path, "wb") do |csv|
+  #     csv << ["id", "brand", "product", "price"]
+  #   end
+  # end
 
  	def update(options={})
  		select = {}
