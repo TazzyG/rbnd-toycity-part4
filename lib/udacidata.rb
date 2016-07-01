@@ -12,7 +12,7 @@ class Udacidata
  	def self.create(attributes = nil)
 
     CSV.foreach(@@data_path) do |row|
-      if row[2] == attributes[:id]
+      if row[0] == attributes[:id]
         return self.new(id: row[0], brand: row[1], name: row[2], price: row[3])
       else
         object = self.new(attributes)
