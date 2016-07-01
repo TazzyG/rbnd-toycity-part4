@@ -33,23 +33,18 @@ class Udacidata
  		products
  	end
 
-  def self.first(item = 1)
-    item == 1 ? self.all.first : self.all.take(item)
+  def self.take_items(from, n=nil)
+      n ? all.send(from, n) : all.public_send(from)
   end
 
-  def self.last(item = 1)
-    item == 1 ? self.all.last : self.all.reverse.take(item)
+  def self.first(n=nil)
+        self.take_items(:first, n)
   end
 
-  def self.find(id)
-    CSV.foreach(@@data_path, headers: true) do |row|
-      if row["id"].to_i == id
-        return Product.new(id: row["id"], name: row["product"], brand: row["brand"], price: row["price"])
-      end
-    end
-    raise UdacidataErrors::ProductNotFoundError, "No product matches product id '#{id}'."
+  def self.last(n=nil)
+       self.take_items(:last, n)
   end
-
+  
  	def self.find(id)
     item = self.all.select {|item| item.id == id}.first 
     unless item
