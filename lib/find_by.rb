@@ -16,6 +16,11 @@ class Module
     create_finder_methods(method_name.to_s[8..-1])
     send(method_name, *arguments)
   end
+
+  def respond_to_missing(method_name)
+    method_name[-1] == '?'
+  end
+
 end
 
 

@@ -6,14 +6,6 @@ module Analyzable
 
 	@@data_path = File.dirname(__FILE__) + "/../data/data.csv"
 
-	def setup
-    @data_path = File.dirname(__FILE__) + "/../data/data.csv"
-    CSV.open(@data_path, "wb") do |csv|
-      csv << ["id", "brand", "product", "price"]
-    end
-    db_seed
-  end
-
 	def average_price(product_arr)
 		total_price = 0
 		product_arr.each do |product|
@@ -34,8 +26,6 @@ module Analyzable
     end
     brand_hash
 
-   
-    
   end
 
   ## tried to create meta method for this, similar to find_by using count by, but went nuts.
@@ -48,10 +38,10 @@ module Analyzable
         name_hash["#{product.name}"] += 1
       end
     end
-     name_hash
-    
-     
+     name_hash 
   end
+
+
   def print_report(product_arr)
     average_price = average_price(product_arr).to_s + "\n"
 
@@ -68,35 +58,6 @@ module Analyzable
     report
   end
 
-  # def print_pretty_report(product_arr)
-
-  #   # I tried a few things to clean up the report but it failed my tests. 
-  #   # If there is a way to partion with ("=> +2 char "), I couldn't find it. Played with Class:String 
-  #   report = 
-  #   product_arr = product_arr
-  #   average_price = average_price(product_arr).to_s
-  #   brand_report = count_by_brand(product_arr).to_s
-  #   name_report = count_by_name(product_arr).to_s
-  #   puts brand_report
-  #   puts name_report
-
-  #   #Prettier code, but it makes the tests fail. 
-  #   puts "Brand Performance".upcase.colorize(:green)
-  #   puts
-  #   pretty_brand_report = brand_report.delete("{""}") #Caused test to fail, made new variable names
-  #   pretty_brand_report = pretty_brand_report.gsub(/[,]/, "\n")
-  #   puts pretty_brand_report
-  #   puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~".colorize(:magenta)
-  #   puts "Unit Performance".upcase.colorize(:green)
-  #   puts
-  #   pretty_name_report = name_report.delete("{""}")
-  #   pretty_name_report = pretty_name_report.gsub(/[,]/, "\n")
-  #   puts pretty_name_report
-  #   puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~".colorize(:magenta)
-
-    
-    
-  # end
 end
 
   

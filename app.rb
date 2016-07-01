@@ -1,30 +1,21 @@
-# for gems from udacitask-part2
-
 require_relative 'lib/analyzable'
 require_relative 'lib/product'
 require_relative 'data/schema'
-require_relative 'data/seeds'
 
 include Analyzable
-
-setup
-
-def pretty_lines
-	puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-end
 
 # Uncomment the following code once ALL your tests have passed!
 
 db_create
 
-pretty_lines
+puts "-------------------"
 puts "RETURN ALL PRODUCTS"
-pretty_lines
+puts "-------------------"
 print Product.all
 puts
-pretty_lines
+puts "-----------------"
 puts "CREATE PRODUCTS"
-pretty_lines
+puts "-----------------"
 print Product.create(brand: "Udacity", name: "yoyo", price: 10.00)
 print Product.create(brand: "Bouncy", name: "ball", price: 12.00)
 print Product.create(brand: "MyCool", name: "dollhouse", price: 14.40)
@@ -32,10 +23,11 @@ print Product.create(brand: "MySoft", name: "stuffed animal", price: 2.09)
 print Product.create(brand: "AllMy", name: "yoyo", price: 1.00)
 print Product.create(brand: "Udacity", name: "doll", price: 5.99)
 
-pretty_lines
+puts "-------------------"
 puts "RETURN ALL PRODUCTS"
+puts "-------------------"
 print Product.all
-puts
+
 # puts "--------------------------------------------------------------"
 # puts "TEST ERROR HANDLING FOR DELETE - COMMENT OUT BEFORE SUBMITTING"
 # puts "--------------------------------------------------------------"
@@ -47,99 +39,95 @@ puts
 # print Product.find(1000000000000)
 
 puts
-pretty_lines
+puts "--------------------"
 puts "RETURN FIRST PRODUCT"
-pretty_lines
+puts "--------------------"
 print Product.first
 
 
 puts
-pretty_lines
+puts "-----------------------"
 puts "RETURN FIRST 2 PRODUCTS"
-pretty_lines
+puts "-----------------------"
 print Product.first(2)
 
 puts
-pretty_lines
+puts "-------------------"
 puts "RETURN LAST PRODUCT"
-pretty_lines
+puts "-------------------"
 print Product.last
 
 puts
-pretty_lines
+puts "----------------------"
 puts "RETURN LAST 2 PRODUCTS"
-pretty_lines
+puts "----------------------"
 print Product.last(2)
 
 puts
-pretty_lines
+puts "-------------------------"
 puts "DESTROY PRODUCT WITH ID 2"
-pretty_lines
+puts "-------------------------"
 print Product.destroy(2)
 
 puts
-pretty_lines
+puts "-------------------------------"
 puts "FIND PRODUCT 4 AND UPDATE BRAND"
-pretty_lines
+puts "-------------------------------"
 print Product.find(4).update(brand: "NewBrand")
 
 puts
-pretty_lines
+puts "--------------"
 puts "FIND PRODUCT 1"
-pretty_lines
+puts "--------------"
 print Product.find(1)
 
 puts
-pretty_lines
+puts "-----------------"
 puts "DESTROY PRODUCT 3"
-pretty_lines
+puts "-----------------"
 print Product.destroy(3)
 
 puts
-pretty_lines
+puts "-------------------------------"
 puts "RETURN PRODUCTS WITH BRAND UDACITY"
-pretty_lines
+puts "-------------------------------"
 print Product.where(brand: "Udacity")
 
 puts
-pretty_lines
+puts "-------------------------------------"
 puts "RETURN FIRST PRODUCT WITH GIVEN BRAND"
-pretty_lines
+puts "-------------------------------------"
 print Product.find_by_brand("Udacity")
 puts
 
 puts
-pretty_lines
+puts "------------------------------------"
 puts "RETURN FIRST PRODUCT WITH GIVEN NAME"
-pretty_lines
+puts "------------------------------------"
 print Product.find_by_name("yoyo")
 puts
 
 puts
-pretty_lines
+puts "----------------------------"
 puts "RETURN HASH WITH NAME COUNTS"
-pretty_lines
-puts Analyzable::count_by_name(Product.all)
-pretty_lines
+puts "----------------------------"
+print Analyzable::count_by_name(Product.all)
+
 puts
-pretty_lines
+puts "----------------------------"
 puts "RETURN HASH WITH BRAND COUNTS"
-pretty_lines
-puts Analyzable::count_by_brand(Product.all)
-pretty_lines
+puts "----------------------------"
+print Analyzable::count_by_brand(Product.all)
+
 puts
-pretty_lines
+puts "--------------------"
 puts "RETURN AVERAGE PRICE"
-pretty_lines
-puts Analyzable::average_price(Product.all)
+puts "--------------------"
+print Analyzable::average_price(Product.all)
 
 puts
-pretty_lines
+puts "--------------------"
 puts "PRINT SUMMARY REPORT"
-pretty_lines
-puts 
-puts
-puts Analyzable::print_report(Product.all)
-puts
-
+puts "--------------------"
+print Analyzable::print_report(Product.all)
 puts

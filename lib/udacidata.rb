@@ -18,7 +18,7 @@ class Udacidata
    #  products 
 
     CSV.foreach(@@data_path) do |row|
-      if row[2] == attributes[:name]
+      if row[2] == attributes[:id]
         return self.new(id: row[0], brand: row[1], name: row[2], price: row[3])
       else
         object = self.new(attributes)
@@ -44,16 +44,24 @@ class Udacidata
   end
 
   def self.last(item = 1)
-    item == 1 ? self.all.last : self.all.pop(item)
+    item == 1 ? self.all.last : self.all.reverse.take(item)
   end
 
- 	def self.find(id)
+  def self.find(id)
     CSV.foreach(@@data_path, headers: true) do |row|
       if row["id"].to_i == id
         return Product.new(id: row["id"], name: row["product"], brand: row["brand"], price: row["price"])
       end
     end
     raise UdacidataErrors::ProductNotFoundError, "No product matches product id '#{id}'."
+  end
+
+ 	def self.find(id)
+    item = self.all.select {|item| item.id == id}.first 
+    unless item
+      raise ProductNotFoundError, "Product id: #{id} not found."
+    end
+    item
   end
 
 
@@ -80,13 +88,6 @@ class Udacidata
     result
   end
 
-  # not sure if I need this but kept it just in case - had some problems with missing item 2
-  # def self.reset_file
-  #   CSV.open(@@data_path, "wb") do |csv|
-  #     csv << ["id", "brand", "product", "price"]
-  #   end
-  # end
-
  	def update(options={})
  		select = {}
  		select[:id] = self.id
@@ -97,7 +98,6 @@ class Udacidata
 
     Product.destroy(self.id)
     Product.create(select)
-
 
  	end
 end
