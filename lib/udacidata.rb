@@ -10,12 +10,6 @@ class Udacidata
   create_finder_methods(:brand, :name)
 
  	def self.create(attributes = nil)
-    # this did not work, keeping for reference (churned quite a bit).. kept it for learning.
- 		# products = []
- 		# CSV.read(@@data_path, headers:true).each do |product|
- 		# 	products << self.new(id: product["id"], brand: product["brand"], name: product["name"], price: product["price"])
-   #  end
-   #  products 
 
     CSV.foreach(@@data_path) do |row|
       if row[2] == attributes[:id]
@@ -63,8 +57,6 @@ class Udacidata
     end
     item
   end
-
-
 
  	def self.destroy(id)
  		product = self.find(id)

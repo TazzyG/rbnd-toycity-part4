@@ -1,5 +1,6 @@
 require_relative 'find_by'
 require_relative 'errors'
+require_relative 'count_by'
 
 
 module Analyzable
@@ -15,31 +16,9 @@ module Analyzable
     average_price
 	end
 
-	def count_by_brand(product_arr)
-  brand_hash = {} 
-    product_arr.each do |product|
-      unless brand_hash.include? product.brand
-        brand_hash["#{product.brand}"] = 1
-      else
-        brand_hash["#{product.brand}"] += 1
-      end
-    end
-    brand_hash
-
-  end
-
-  ## tried to create meta method for this, similar to find_by using count by, but went nuts.
-  def count_by_name(product_arr)
-  name_hash = {}
-    product_arr.each do |product|
-      unless name_hash.include? product.name
-        name_hash["#{product.name}"] = 1
-      else
-        name_hash["#{product.name}"] += 1
-      end
-    end
-     name_hash 
-  end
+  #replaced with metaprogramming, thanks to awesome reviewer who gave tip. :)
+  create_count_methods(:brand)
+  create_count_methods(:name)
 
 
   def print_report(product_arr)
